@@ -1,0 +1,28 @@
+# values.yaml
+service:
+  port: 8080
+
+elasticsearch:
+  config:
+    bootstrap_memory_lock: true
+    ES_JAVA_OPTS: "-Xms512m -Xmx2G"
+    # discovery_type: "single-node"
+  # xpack_security_enabled: false
+  persistence:
+    accessModes: ReadWriteOnce
+    size: 5Gi # Adjust the size as per your requirements
+    storageClassName: standard
+
+postgres:
+  persistence:
+    accessModes: ReadWriteOnce
+    size: 5Gi # Adjust the size as per your requirements
+    storageClassName: standard
+
+# elasticsearch:
+
+persistentVolume:
+  enabled: true
+  storageClassName: "standard"
+  accessModes: ["ReadWriteOnce"]
+  size: "5Gi"

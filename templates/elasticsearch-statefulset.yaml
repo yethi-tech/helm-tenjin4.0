@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-elasticsearch
+spec:
+  serviceName: "elasticsearch"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: tenjin-es
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
+        resources:
+          limits:
+            memory: "4Gi"
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-elasticsearch-config
+        command: ["elasticsearch"]
+        args: ["-Ehttp.host=0.0.0.0", "-Ediscovery.type=single-node"]
+      #   readinessProbe:
+      #     httpGet:
+      #       path: /
+      #       port: 9200
+      #     initialDelaySeconds: 20
+      #     periodSeconds: 10
+      #     timeoutSeconds: 5
+      #     successThreshold: 1
+      #     failureThreshold: 3
+      #   livenessProbe:
+      #     exec:
+      #       command:
+      #       - sh
+      #       - -c
+      #       - curl -s http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"'
+      #     initialDelaySeconds: 30
+      #     periodSeconds: 10
+      # securityContext:
+      #   fsGroup: 1000
+  volumeClaimTemplates:
+  - metadata:
+      name: elasticsearch-pvc
+    spec:
+      accessModes: [ "{{ .Values.elasticsearch.persistence.accessModes }}" ]
+      storageClassName: "{{ .Values.elasticsearch.persistence.storageClassName }}"
+      resources:
+        requests:
+          storage: {{ .Values.elasticsearch.persistence.size }}
