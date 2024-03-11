@@ -11,18 +11,18 @@ elasticsearch:
   persistence:
     accessModes: ReadWriteOnce
     size: 5Gi # Adjust the size as per your requirements
-    storageClassName: standard
+    storageClassName: managed-csi
 
 postgres:
   persistence:
     accessModes: ReadWriteOnce
-    size: 5Gi # Adjust the size as per your requirements
-    storageClassName: standard
+    size: 10Gi # Adjust the size as per your requirements
+    storageClassName: managed-csi
 
 # elasticsearch:
 
 persistentVolume:
   enabled: true
-  storageClassName: "standard"
+  storageClassName: "managed-csi"
   accessModes: ["ReadWriteOnce"]
-  size: "5Gi"
+  size: "3Gi"

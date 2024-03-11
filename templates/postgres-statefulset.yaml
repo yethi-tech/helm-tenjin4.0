@@ -23,7 +23,7 @@ spec:
             name: {{ .Release.Name }}-postgres-config
         volumeMounts:
         - name: postgres-pv
-          mountPath: /var/lib/postgresql/data
+          mountPath: /data
   volumeClaimTemplates:
   - metadata:
       name: postgres-pv
@@ -32,4 +32,4 @@ spec:
       storageClassName: "{{ .Values.postgres.persistence.storageClassName | default "standard" }}"
       resources:
         requests:
-          storage: {{ .Values.postgres.persistence.size | default "5Gi" }}
+          storage: {{ .Values.postgres.persistence.size | default "10Gi" }}
