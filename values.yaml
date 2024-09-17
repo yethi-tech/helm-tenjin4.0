@@ -1,4 +1,3 @@
-# values.yaml
 service:
   port: 8080
 
@@ -8,21 +7,26 @@ elasticsearch:
     ES_JAVA_OPTS: "-Xms512m -Xmx2G"
     # discovery_type: "single-node"
   # xpack_security_enabled: false
+elasticsearch:
   persistence:
-    accessModes: ReadWriteOnce
-    size: 5Gi # Adjust the size as per your requirements
-    storageClassName: managed-csi
+      accessModes: ReadWriteOnce
+      size: 5Gi # Adjust the size as per your requirements
+      storageClassName: standard
 
 postgres:
   persistence:
-    accessModes: ReadWriteOnce
-    size: 10Gi # Adjust the size as per your requirements
-    storageClassName: managed-csi
+      accessModes: ReadWriteOnce
+      size: 10Gi # Adjust the size as per your requirements
+      storageClassName: standard
 
-# elasticsearch:
-
+#tenjin-pv:
+#  persistence:
+#      accessModes: ReadWriteOnce
+#      size: 3Gi # Adjust the size as per your requirements
+#      storageClassName: standard
+#
 persistentVolume:
   enabled: true
-  storageClassName: "managed-csi"
+  storageClassName: "standard"
   accessModes: ["ReadWriteOnce"]
   size: "3Gi"
