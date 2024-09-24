@@ -1,25 +1,23 @@
 service:
+  type: NodePort
   port: 8080
-
 elasticsearch:
   config:
     bootstrap_memory_lock: true
     ES_JAVA_OPTS: "-Xms512m -Xmx2G"
     # discovery_type: "single-node"
   # xpack_security_enabled: false
-elasticsearch:
   persistence:
-      accessModes: ReadWriteOnce
-      size: 5Gi # Adjust the size as per your requirements
-      storageClassName: standard
-
+    accessModes: ReadWriteOnce
+    size: 5Gi # Adjust the size as per your requirements
+    storageClassName: standard
 postgres:
   persistence:
-      accessModes: ReadWriteOnce
-      size: 10Gi # Adjust the size as per your requirements
-      storageClassName: standard
-
+    accessModes: ReadWriteOnce
+    size: 10Gi # Adjust the size as per your requirements
+    storageClassName: standard
 #tenjin-pv:
+
 #  persistence:
 #      accessModes: ReadWriteOnce
 #      size: 3Gi # Adjust the size as per your requirements
@@ -30,3 +28,10 @@ persistentVolume:
   storageClassName: "standard"
   accessModes: ["ReadWriteOnce"]
   size: "3Gi"
+environment:
+  POSTGRES_DB: tenjin
+  POSTGRES_USER: yethi
+  POSTGRES_PASSWORD: Yethi123
+  DEFAULT_USER_PASSWORD: Welcome@123
+  TENJIN_HOST_NAME: http://localhost
+  TENJIN_ALLOWED_URL: http://localhost
