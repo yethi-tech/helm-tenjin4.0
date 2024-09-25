@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}-tenjin-te4-service
 spec:
   selector:
-    app: tenjin-te4
+    app: tenjin
   ports:
     - protocol: TCP
       port: 80
