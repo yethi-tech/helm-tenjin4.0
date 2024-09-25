@@ -33,7 +33,7 @@ spec:
                 name: {{ .Release.Name }}-configmaptenjin
           volumeMounts:
             - name: tenjin-pv
-              mountPath: /mnt/data
+              mountPath: /root
       volumes:
         - name: tenjin-pv
           persistentVolumeClaim:
@@ -66,7 +66,6 @@ spec:
   storageClassName: {{ .Values.persistentVolume.storageClassName }}  # Example: standard
   hostPath:
     path: /mnt/data  # Change this if using another type of volume like NFS or AWS EBS
-    type: DirectoryOrCreate
 
 ---
 # Add PVC definition for PVC in the same file

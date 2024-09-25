@@ -23,7 +23,7 @@ spec:
             name: {{ .Release.Name }}-postgres-config
         volumeMounts:
         - name: postgres-pv
-          mountPath: /mnt/postgres
+          mountPath: /data
   volumeClaimTemplates:
   - metadata:
       name: postgres-pv
