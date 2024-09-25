@@ -65,7 +65,8 @@ spec:
     - ReadWriteOnce
   storageClassName: {{ .Values.persistentVolume.storageClassName }}  # Example: standard
   hostPath:
-    path: /root  # Change this if using another type of volume like NFS or AWS EBS
+    path: /mnt/data  # Change this if using another type of volume like NFS or AWS EBS
+    type: DirectoryOrCreate
 
 ---
 # Add PVC definition for PVC in the same file

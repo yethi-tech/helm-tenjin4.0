@@ -37,8 +37,6 @@ spec:
 
 ---
 
----
-
 # PersistentVolume definition for PostgreSQL
 apiVersion: v1
 kind: PersistentVolume
@@ -51,4 +49,5 @@ spec:
     - {{ .Values.postgres.persistence.accessModes | default "ReadWriteOnce" }}
   storageClassName: {{ .Values.postgres.persistence.storageClassName | default "standard" }}
   hostPath:
-    path: /root/postgres
+    path: /mnt/postgres
+    type: DirectoryOrCreate

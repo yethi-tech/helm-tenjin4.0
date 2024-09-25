@@ -51,4 +51,5 @@ spec:
     - {{ .Values.elasticsearch.persistence.accessModes | default "ReadWriteOnce" }}
   storageClassName: {{ .Values.elasticsearch.persistence.storageClassName | default "standard" }}
   hostPath:
-    path: /root/elasticsearch
+    path: /mnt/elasticsearch
+    type: DirectoryOrCreate
