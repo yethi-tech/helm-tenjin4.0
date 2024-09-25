@@ -60,10 +60,10 @@ metadata:
   name: tenjin-pv
 spec:
   capacity:
-    storage: {{ .Values.persistentVolume.size }}  # Example: 10Gi
+    storage: {{ .Values.tenjin.persistence.size }}  # Example: 10Gi
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.persistentVolume.storageClassName }}  # Example: standard
+  storageClassName: {{ .Values.tenjin.persistence.storageClassName }}  # Example: standard
   hostPath:
     path: /mnt/data  # Change this if using another type of volume like NFS or AWS EBS
 
@@ -79,5 +79,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.persistentVolume.size }}
-  storageClassName: {{ .Values.persistentVolume.storageClassName }}
+      storage: {{ .Values.tenjin.persistence.size }}
+  storageClassName: {{ .Values.tenjin.persistence.storageClassName }}

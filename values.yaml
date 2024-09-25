@@ -1,9 +1,10 @@
-persistentVolume:
-  storageClassName: "local-storage"
-  size: "3Gi"
-service:
-  type: NodePort
-  port: 8080
+tenjin:
+  persistence:
+    storageClassName: "local-storage"
+    size: "3Gi"
+  service:
+    type: NodePort
+    port: 8080
 elasticsearch:
   config:
     bootstrap_memory_lock: true
