@@ -52,4 +52,3 @@ spec:
   storageClassName: {{ .Values.elasticsearch.persistence.storageClassName | default "standard" }}
   hostPath:
     path: /mnt/elasticsearch
-    type: DirectoryOrCreate

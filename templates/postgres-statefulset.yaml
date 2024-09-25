@@ -23,7 +23,7 @@ spec:
             name: {{ .Release.Name }}-postgres-config
         volumeMounts:
         - name: postgres-pv
-          mountPath: /data
+          mountPath: /mnt/postgres
   volumeClaimTemplates:
   - metadata:
       name: postgres-pv
@@ -50,4 +50,3 @@ spec:
   storageClassName: {{ .Values.postgres.persistence.storageClassName | default "standard" }}
   hostPath:
     path: /mnt/postgres
-    type: DirectoryOrCreate
