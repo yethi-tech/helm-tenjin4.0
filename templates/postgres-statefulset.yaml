@@ -48,5 +48,6 @@ spec:
   accessModes:
     - {{ .Values.postgres.persistence.accessModes }}
   storageClassName: {{ .Values.postgres.persistence.storageClassName }}
-  hostPath:
+  local:
     path: /mnt/postgres
+  

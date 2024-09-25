@@ -64,8 +64,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: {{ .Values.tenjin.persistence.storageClassName }}  # Example: standard
-  hostPath:
-    path: /mnt/data  # Change this if using another type of volume like NFS or AWS EBS
+  local:
+    path: /mnt/data 
+     # Change this if using another type of volume like NFS or AWS EBS
+
 
 ---
 # Add PVC definition for PVC in the same file

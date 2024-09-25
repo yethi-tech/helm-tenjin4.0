@@ -50,5 +50,5 @@ spec:
   accessModes:
     - {{ .Values.elasticsearch.persistence.accessModes  }}
   storageClassName: {{ .Values.elasticsearch.persistence.storageClassName }}
-  hostPath:
+  local:
     path: /mnt/elasticsearch
