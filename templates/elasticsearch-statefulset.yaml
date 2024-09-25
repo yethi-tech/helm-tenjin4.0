@@ -51,4 +51,4 @@ spec:
     - {{ .Values.elasticsearch.persistence.accessModes  }}
   storageClassName: {{ .Values.elasticsearch.persistence.storageClassName }}
   local:
-    path: /mnt/elasticsearch
+    path: /usr/share/elasticsearch/data
