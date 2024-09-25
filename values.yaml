@@ -1,5 +1,5 @@
 persistentVolume:
-  storageClassName: "standard"
+  storageClassName: "local-storage"
   size: "3Gi"
 service:
   type: NodePort
@@ -11,12 +11,12 @@ elasticsearch:
   persistence:
     accessModes: ReadWriteOnce
     size: 5Gi # Adjust the size as per your requirements
-    storageClassName: standard
+    storageClassName: local-storage
 postgres:
   persistence:
     accessModes: ReadWriteOnce
     size: 10Gi # Adjust the size as per your requirements
-    storageClassName: standard
+    storageClassName: local-storage
 environment:
   POSTGRES_DB: tenjin
   POSTGRES_USER: yethi
