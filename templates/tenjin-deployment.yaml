@@ -3,16 +3,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-tenjin-te4
+  name: {{ .Release.Name }}-tenjin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tenjin-te4
+      app: tenjin
   template:
     metadata:
       labels:
-        app: tenjin-te4
+        app: tenjin
     spec:
       containers:
         - name: tenjin-core

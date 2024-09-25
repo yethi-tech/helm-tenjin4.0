@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "tenjin-enterprise.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "tenjin-enterprise.fullname" . }}:{{ .Values.tenjin.service.port }}']
   restartPolicy: Never
