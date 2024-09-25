@@ -51,6 +51,22 @@ spec:
               done
 
 
+
+---
+# PersistentVolume definition
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tenjin-pv
+spec:
+  capacity:
+    storage: {{ .Values.persistentVolume.size }}  # Example: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ .Values.persistentVolume.storageClassName }}  # Example: standard
+  hostPath:
+    path: /root  # Change this if using another type of volume like NFS or AWS EBS
+
 ---
 # Add PVC definition for PVC in the same file
 

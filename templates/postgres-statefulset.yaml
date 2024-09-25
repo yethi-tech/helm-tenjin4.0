@@ -33,3 +33,22 @@ spec:
       resources:
         requests:
           storage: {{ .Values.postgres.persistence.size | default "10Gi" }}
+
+
+---
+
+---
+
+# PersistentVolume definition for PostgreSQL
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv
+spec:
+  capacity:
+    storage: {{ .Values.postgres.persistence.size | default "10Gi" }}  # Example: 10Gi
+  accessModes:
+    - {{ .Values.postgres.persistence.accessModes | default "ReadWriteOnce" }}
+  storageClassName: {{ .Values.postgres.persistence.storageClassName | default "standard" }}
+  hostPath:
+    path: /root/postgres

@@ -27,25 +27,6 @@ spec:
             name: {{ .Release.Name }}-elasticsearch-config
         command: ["elasticsearch"]
         args: ["-Ehttp.host=0.0.0.0", "-Ediscovery.type=single-node"]
-      #   readinessProbe:
-      #     httpGet:
-      #       path: /
-      #       port: 9200
-      #     initialDelaySeconds: 20
-      #     periodSeconds: 10
-      #     timeoutSeconds: 5
-      #     successThreshold: 1
-      #     failureThreshold: 3
-      #   livenessProbe:
-      #     exec:
-      #       command:
-      #       - sh
-      #       - -c
-      #       - curl -s http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"'
-      #     initialDelaySeconds: 30
-      #     periodSeconds: 10
-      # securityContext:
-      #   fsGroup: 1000
   volumeClaimTemplates:
   - metadata:
       name: elasticsearch-pvc
@@ -55,3 +36,19 @@ spec:
       resources:
         requests:
           storage: {{ .Values.elasticsearch.persistence.size }}
+
+---
+
+# PersistentVolume definition for Elasticsearch
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: elasticsearch-pv
+spec:
+  capacity:
+    storage: {{ .Values.elasticsearch.persistence.size | default "10Gi" }}
+  accessModes:
+    - {{ .Values.elasticsearch.persistence.accessModes | default "ReadWriteOnce" }}
+  storageClassName: {{ .Values.elasticsearch.persistence.storageClassName | default "standard" }}
+  hostPath:
+    path: /root/elasticsearch
