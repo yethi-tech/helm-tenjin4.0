@@ -52,32 +52,32 @@ spec:
 
 
 
----
-# PersistentVolume definition
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: tenjin-pv
-spec:
-  capacity:
-    storage: {{ .Values.persistentVolume.size }}  # Example: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: {{ .Values.persistentVolume.storageClassName }}  # Example: standard
-  hostPath:
-    path: /mnt/data  # Change this if using another type of volume like NFS or AWS EBS
+# ---
+# # PersistentVolume definition
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: tenjin-pv
+# spec:
+#   capacity:
+#     storage: {{ .Values.persistentVolume.size }}  # Example: 10Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: {{ .Values.persistentVolume.storageClassName }}  # Example: standard
+#   hostPath:
+#     path: /mnt/data  # Change this if using another type of volume like NFS or AWS EBS
 
----
-# Add PVC definition for PVC in the same file
+# ---
+# # Add PVC definition for PVC in the same file
 
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: tenjin-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: {{ .Values.persistentVolume.size }}
-  storageClassName: {{ .Values.persistentVolume.storageClassName }}
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: tenjin-pvc
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: {{ .Values.persistentVolume.size }}
+#   storageClassName: {{ .Values.persistentVolume.storageClassName }}
