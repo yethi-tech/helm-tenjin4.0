@@ -19,15 +19,15 @@ spec:
           image: yethitech/tenjin-enterprise:latest
           ports:
             - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /api/public/health
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
+        #   readinessProbe:
+        #     httpGet:
+        #       path: /api/public/health
+        #       port: 8080
+        #     initialDelaySeconds: 10
+        #     periodSeconds: 10
+        #     timeoutSeconds: 5
+        #     successThreshold: 1
+        #     failureThreshold: 3
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-configmaptenjin
