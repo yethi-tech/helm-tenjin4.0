@@ -23,5 +23,5 @@ environment:
   POSTGRES_USER: yethi
   POSTGRES_PASSWORD: Yethi123
   DEFAULT_USER_PASSWORD: Welcome@123
-  TENJIN_HOST_NAME: http://localhost
+  TENJIN_HOST_NAME: http://192.168.17.101:31824
   TENJIN_ALLOWED_URL: http://localhost
