@@ -22,11 +22,11 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-postgres-config
         volumeMounts:
-        - name: postgres-pv
+        - name: {{ .Release.Name }}postgres-pv
           mountPath: /data
   volumeClaimTemplates:
   - metadata:
-      name: postgres-pv
+      name: {{ .Release.Name }}postgres-pv
     spec:
       accessModes: [ "{{ .Values.postgres.persistence.accessModes | default "ReadWriteOnce" }}" ]
       storageClassName: "{{ .Values.postgres.persistence.storageClassName | default "standard" }}"
@@ -41,7 +41,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: postgres-pv
+  name: {{ .Release.Name }}postgres-pv
 spec:
   capacity:
     storage: {{ .Values.postgres.persistence.size  }}  # Example: 10Gi

@@ -23,10 +23,10 @@ spec:
             - configMapRef:
                 name: {{ .Release.Name }}-configmaptenjin
           volumeMounts:
-            - name: tenjin-pv
+            - name: {{ .Release.Name }}tenjin-pv
               mountPath: /backend
       volumes:
-        - name: tenjin-pv
+        - name: {{ .Release.Name }}tenjin-pv
           persistentVolumeClaim:
             claimName: tenjin-pvc
       initContainers:   # Add an init container to wait for Elasticsearch and PostgreSQL
@@ -48,7 +48,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: tenjin-pv
+  name: {{ .Release.Name }}tenjin-pv
 spec:
   capacity:
     storage: {{ .Values.tenjin.persistence.size }}  # Example: 10Gi
