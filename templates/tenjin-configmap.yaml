@@ -6,7 +6,7 @@ metadata:
   name: {{ .Release.Name }}-configmaptenjin
 data:
   SPRING_DATASOURCE_DRIVER_CLASS_NAME: "org.postgresql.Driver"
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://tenjin-postgres:5432/{{ .Values.environment.POSTGRES_DB }}"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://{{ .Release.Name }}-postgres:5432/{{ .Values.environment.POSTGRES_DB }}"
   SPRING_DATASOURCE_USERNAME: "{{ .Values.environment.POSTGRES_USER }}"
   SPRING_DATASOURCE_PASSWORD: "{{ .Values.environment.POSTGRES_PASSWORD }}"
   TENJIN_DEFAULT_SEARCH_PAGE_SIZE: "50"
@@ -22,7 +22,7 @@ data:
   SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE: "10MB"
   SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE: "20MB"
   SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
-  TENJIN_ELASTIC_HOST: "tenjin-elasticsearch"
+  TENJIN_ELASTIC_HOST: "{{ .Release.Name }}-elasticsearch"
   TENJIN_ELASTIC_PORT: "9200"
   TENJIN_ELASTIC_USERNAME: "elastic"
   TENJIN_ELASTIC_SECURETYPE: "http"

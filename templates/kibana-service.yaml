@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kibana-services
+  name: {{ .Release.Name }}-kibana
 spec:
   selector:
     app: kibana

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kibana
+  name: {{ .Release.Name }}-kibana
 spec:
   replicas: 1
   selector:

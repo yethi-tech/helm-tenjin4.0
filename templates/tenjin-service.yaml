@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tenjin
+  name: {{ .Release.Name }}-tenjin_core
   labels:
     app: tenjin
 spec:
