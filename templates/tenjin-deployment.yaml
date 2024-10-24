@@ -81,3 +81,6 @@ spec:
     requests:
       storage: {{ .Values.tenjin.persistence.size }}
   storageClassName: {{ .Values.tenjin.persistence.storageClassName }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-tenjin
