@@ -28,7 +28,7 @@ spec:
       volumes:
         - name: {{ .Release.Name }}tenjin-pv
           persistentVolumeClaim:
-            claimName: tenjin-pvc
+            claimName: {{ .Release.Name }}tenjin-pvc
       initContainers:   # Add an init container to wait for Elasticsearch and PostgreSQL
         - name: wait-for-dependencies
           image: busybox
@@ -49,6 +49,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ .Release.Name }}tenjin-pv
+  lables: 
+    app: {{ .Release.Name }}-tenjin
 spec:
   capacity:
     storage: {{ .Values.tenjin.persistence.size }}  # Example: 10Gi
@@ -67,6 +69,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: tenjin-pvc
+  labels:
+    app: {{ .Release.Name }}-tenjin
   annotations:
     "helm.sh/resource-policy": "keep"
  
