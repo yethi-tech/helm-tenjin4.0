@@ -68,7 +68,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: tenjin-pvc
+  name: {{ .Release.Name }}tenjin-pvc
   labels:
     app: {{ .Release.Name }}-tenjin
   annotations:
