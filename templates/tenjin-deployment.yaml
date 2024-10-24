@@ -35,7 +35,7 @@ spec:
           command:
             - "/bin/sh"
             - "-c"
-            - |
+            - >
               until nc -zv {{ .Release.Name }}-elasticsearch 9200 && nc -zv {{ .Release.Name }}-postgres 5432; do
                 echo "Waiting for dependencies to be available..."
                 sleep 5
