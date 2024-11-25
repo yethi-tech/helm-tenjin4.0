@@ -41,4 +41,4 @@ data:
   TENJIN_ALLOWED_URL: "{{ .Values.environment.TENJIN_ALLOWED_URL }}"
   TENJIN_SCHEDULER_ENABLED: "Y"
   TENJIN_LONGPOLLING_SCHEDULER_ENABLED: "Y"
-  tenjin.ai-host: {{ .Release.Name }}-tenjin-ai
+  tenjin.ai-host: http://{{ .Release.Name }}-tenjin-ai
