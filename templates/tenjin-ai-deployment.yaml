@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tenjin-ai
+       app: tenjin-ai
   template:
     metadata:
       labels:

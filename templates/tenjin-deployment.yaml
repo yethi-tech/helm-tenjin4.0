@@ -1,5 +1,5 @@
 # templates/deployment.yaml
- 
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,9 +40,7 @@ spec:
                 echo "Waiting for dependencies to be available..."
                 sleep 5
               done
- 
- 
- 
+
 ---
 # PersistentVolume definition
 apiVersion: v1

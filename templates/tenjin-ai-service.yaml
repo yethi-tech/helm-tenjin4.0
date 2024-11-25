@@ -11,4 +11,4 @@ spec:
     - protocol: TCP
       port: 8022
       targetPort: 8022
-  type: ClusterIP		
+  type: ClusterIP
