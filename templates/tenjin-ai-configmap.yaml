@@ -5,6 +5,7 @@ metadata:
 data:
   HOST: "http://192.168.16.88"
   PORT: "30557"
+  OPENAI_API_KEY: ""
   db_user: "yethi"
   db_password: "Yethi123"
   db_host: "192.168.16.88"
