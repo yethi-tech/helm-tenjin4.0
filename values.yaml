@@ -1,7 +1,8 @@
 tenjin:
+  tenjin:
   persistence:
-    storageClassName: "local-storage"
-    size: "3Gi"
+    size: "20Gi" # Size of the storage
+    storageClassName: "standard" # Name of the storage class (adjust based on your cluster)
   service:
     type: NodePort
     port: 8080
@@ -11,13 +12,13 @@ elasticsearch:
     ES_JAVA_OPTS: "-Xms512m -Xmx2G"
   persistence:
     accessModes: ReadWriteOnce
-    size: 5Gi # Adjust the size as per your requirements
-    storageClassName: local-storage
+    storageClassName: standard
+    size: 20Gi
 postgres:
   persistence:
-    accessModes: ReadWriteOnce
-    size: 10Gi # Adjust the size as per your requirements
-    storageClassName: local-storage
+    size: 10Gi # Storage size
+    accessModes: ReadWriteOnce # Access mode
+    storageClassName: standard # StorageClass for dynamic provisioning
 environment:
   POSTGRES_DB: tenjin
   POSTGRES_USER: yethi

@@ -1,5 +1,3 @@
-# templates/deployment.yaml
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,10 +21,10 @@ spec:
             - configMapRef:
                 name: {{ .Release.Name }}-configmaptenjin
           volumeMounts:
-            - name: {{ .Release.Name }}tenjin-pv
+            - name: tenjin-data-volume
               mountPath: /backend
       volumes:
-        - name: {{ .Release.Name }}tenjin-pv
+        - name: tenjin-data-volume
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}tenjin-pvc
       initContainers:   # Add an init container to wait for Elasticsearch and PostgreSQL
@@ -40,29 +38,9 @@ spec:
                 echo "Waiting for dependencies to be available..."
                 sleep 5
               done
+---
 
----
-# PersistentVolume definition
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .Release.Name }}tenjin-pv
-  labels: 
-    app: {{ .Release.Name }}-tenjin
-spec:
-  capacity:
-    storage: {{ .Values.tenjin.persistence.size }}  # Example: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: {{ .Values.tenjin.persistence.storageClassName }}  # Example: standard
-  hostPath:
-    path: /backend
-     # Change this if using another type of volume like NFS or AWS EBS
- 
- 
----
-# Add PVC definition for PVC in the same file
- 
+# PersistentVolumeClaim definition (dynamic provisioning)
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -70,15 +48,11 @@ metadata:
   labels:
     app: {{ .Release.Name }}-tenjin
   annotations:
-    "helm.sh/resource-policy": "keep"
- 
+    "helm.sh/resource-policy": "keep"  # Prevent PVC deletion when uninstalling the Helm chart
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.tenjin.persistence.size }}
-  storageClassName: {{ .Values.tenjin.persistence.storageClassName }}
-  selector:
-    matchLabels:
-      app: {{ .Release.Name }}-tenjin
+      storage: {{ .Values.tenjin.persistence.size | default "10Gi" }}
+  storageClassName: {{ .Values.tenjin.persistence.storageClassName | default "standard" }}

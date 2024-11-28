@@ -1,3 +1,4 @@
+# StatefulSet Definition
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -22,32 +23,15 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-postgres-config
         volumeMounts:
-        - name: {{ .Release.Name }}postgres-pv
-          mountPath: /data
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
   - metadata:
-      name: {{ .Release.Name }}postgres-pv
+      name: postgres-data
     spec:
-      accessModes: [ "{{ .Values.postgres.persistence.accessModes | default "ReadWriteOnce" }}" ]
+      accessModes: 
+        - {{ .Values.postgres.persistence.accessModes | default "ReadWriteOnce" }}
       storageClassName: "{{ .Values.postgres.persistence.storageClassName | default "standard" }}"
       resources:
         requests:
           storage: {{ .Values.postgres.persistence.size | default "10Gi" }}
-
-
----
-
-# PersistentVolume definition for PostgreSQL
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .Release.Name }}postgres-pv
-spec:
-  capacity:
-    storage: {{ .Values.postgres.persistence.size  }}  # Example: 10Gi
-  accessModes:
-    - {{ .Values.postgres.persistence.accessModes }}
-  storageClassName: {{ .Values.postgres.persistence.storageClassName }}
-  hostPath:
-    path: /var/lib/postgresql/data
-  
