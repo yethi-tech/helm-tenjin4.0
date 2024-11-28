@@ -22,12 +22,12 @@ spec:
                 name: {{ .Release.Name }}-configmaptenjin
           volumeMounts:
             - name: tenjin-data-volume
-              mountPath: /backend
+              mountPath: /backend  # Mounting the PVC to the container's /backend directory
       volumes:
         - name: tenjin-data-volume
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}tenjin-pvc
-      initContainers:   # Add an init container to wait for Elasticsearch and PostgreSQL
+            claimName: {{ .Release.Name }}tenjin-pvc  # Ensuring the claimName is aligned
+      initContainers:
         - name: wait-for-dependencies
           image: busybox
           command:
@@ -39,7 +39,6 @@ spec:
                 sleep 5
               done
 ---
-
 # PersistentVolumeClaim definition (dynamic provisioning)
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -54,5 +53,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.tenjin.persistence.size | default "10Gi" }}
-  storageClassName: {{ .Values.tenjin.persistence.storageClassName | default "standard" }}
+      storage: {{ .Values.tenjin.persistence.size | default "5Gi" }}  # Templated size from values.yaml
+  storageClassName: {{ .Values.tenjin.persistence.storageClassName | default "standard" }}  # Templated storage class

@@ -1,7 +1,7 @@
 tenjin:
   tenjin:
   persistence:
-    size: "20Gi" # Size of the storage
+    size: "5Gi" # Size of the storage
     storageClassName: "standard" # Name of the storage class (adjust based on your cluster)
   service:
     type: NodePort
@@ -13,7 +13,7 @@ elasticsearch:
   persistence:
     accessModes: ReadWriteOnce
     storageClassName: standard
-    size: 20Gi
+    size: 5Gi
 postgres:
   persistence:
     size: 10Gi # Storage size
