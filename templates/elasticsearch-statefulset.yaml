@@ -30,7 +30,7 @@ spec:
         - name: discovery.type
           value: "single-node"
         - name: ES_JAVA_OPTS
-          value: "{{ .Values.elasticsearch.config.ES_JAVA_OPTS }}"  # Use the value from values.yaml
+          value: {{ .Values.elasticsearch.config.ES_JAVA_OPTS }}  # Use the value from values.yaml
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-elasticsearch-config
@@ -50,8 +50,8 @@ spec:
         "helm.sh/resource-policy": keep  # Prevents PVC deletion when StatefulSet is deleted
     spec:
       accessModes:
-        - "{{ .Values.elasticsearch.persistence.accessModes | default 'ReadWriteOnce' }}"  # Templated accessMode
-      storageClassName: "{{ .Values.elasticsearch.persistence.storageClassName | default 'standard' }}"  # Templated storageClassName
+        - {{ .Values.elasticsearch.persistence.accessModes | default "ReadWriteOnce" }}  # Templated accessMode
+      storageClassName: {{ .Values.elasticsearch.persistence.storageClassName | default "standard" }}  # Templated storageClassName
       resources:
         requests:
-          storage: "{{ .Values.elasticsearch.persistence.size | default '5Gi' }}"  # Templated size from values.yaml
+          storage: {{ .Values.elasticsearch.persistence.size | default "5Gi" }}  # Templated size from values.yaml
