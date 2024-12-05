@@ -53,5 +53,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.tenjin.persistence.size | default "5Gi" }}  # Templated size from values.yaml
+      storage: {{ .Values.tenjin.persistence.size | default "3Gi" }}  # Templated size from values.yaml
   storageClassName: {{ .Values.tenjin.persistence.storageClassName | default "standard" }}  # Templated storage class
