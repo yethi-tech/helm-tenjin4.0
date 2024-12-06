@@ -2,6 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-tenjin-ai
+  labels:
+    name: {{ .Release.Name }}-tenjin-ai
 data:
   HOST: "http://192.168.16.88"
   PORT: "30557"

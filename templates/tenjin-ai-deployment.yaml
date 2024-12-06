@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-tenjin-ai
   labels:
-    app: tenjin-ai
+    name: {{ .Release.Name }}-tenjin-ai
 spec:
   replicas: 1
   selector:

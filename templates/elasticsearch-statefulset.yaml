@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ .Release.Name }}-elasticsearch
+  labels:
+    name: {{ .Release.Name }}-elasticsearch
 spec:
   serviceName: "elasticsearch"
   replicas: 1
@@ -46,6 +48,8 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: elasticsearch-data
+      labels:
+        app: {{ .Release.Name }}-elasticsearch
       annotations:
         "helm.sh/resource-policy": keep  # Prevents PVC deletion when StatefulSet is deleted
     spec:
