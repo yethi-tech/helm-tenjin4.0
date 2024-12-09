@@ -6,7 +6,7 @@ metadata:
     name: {{ .Release.Name }}-kibana
 spec:
   selector:
-    app: {{ .Release.Name }}-kibana
+    app: kibana
   ports:
     - protocol: TCP
       port: 5601
