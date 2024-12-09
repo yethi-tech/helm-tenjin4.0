@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-tenjin-ai
   labels:
-    app: tenjin-ai
+    app: {{ .Release.Name }}-tenjin-ai
 spec:
   selector:
     app: tenjin-ai
