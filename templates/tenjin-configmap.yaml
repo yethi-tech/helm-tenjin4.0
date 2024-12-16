@@ -41,4 +41,6 @@ data:
   TENJIN_ALLOWED_URL: "{{ .Values.environment.TENJIN_ALLOWED_URL }}"
   TENJIN_SCHEDULER_ENABLED: "Y"
   TENJIN_LONGPOLLING_SCHEDULER_ENABLED: "Y"
-  tenjin.ai-host: http://{{ .Release.Name }}-tenjin-ai:8022
+  TENJIN.AI-HOST: http://{{ .Release.Name }}-tenjin-ai:8022
+  TENJIN.EXPORT.PAGE-SIZE: " 250 "
+  TENJIN.ELASTIC.SCROLL.TIMEOUT-MINUTES: "5"
