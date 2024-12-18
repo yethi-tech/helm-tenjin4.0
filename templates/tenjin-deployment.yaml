@@ -24,7 +24,7 @@ spec:
                 name: {{ .Release.Name }}-configmaptenjin
           volumeMounts:
             - name: tenjin-data-volume
-              mountPath: /backend  # Mounting the PVC to the container's /backend directory
+              mountPath: /root  # Mounting the PVC to the container's /backend directory
       volumes:
         - name: tenjin-data-volume
           persistentVolumeClaim:
