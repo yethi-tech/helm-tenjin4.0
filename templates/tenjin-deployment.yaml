@@ -17,6 +17,7 @@ spec:
       containers:
         - name: tenjin-core
           image: yethitech/tenjin-enterprise:4.6.1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:
