@@ -10,6 +10,8 @@ tenjin:
 tenjin_ai:
   image: "yethitech/ai-testcase-generation"  # Default image name
   imageTag: "latest"
+busybox:
+  image: "busybox:latest"
 elasticsearch:
   config:
     bootstrap_memory_lock: true
