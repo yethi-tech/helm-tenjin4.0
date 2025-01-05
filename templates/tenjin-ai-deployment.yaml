@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: tenjin-ai
-          image: yethitech/ai-testcase-generation:latest
+          image: "{{ .Values.tenjin_ai.image | default "yethitech/ai-testcase-generation" }}:{{ .Values.tenjin_ai.imageTag | default "latest" }}"
           imagePullPolicy: Always
           resources:
             limits:

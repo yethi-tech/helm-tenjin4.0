@@ -1,11 +1,15 @@
 tenjin:
-  tenjin:
+  image: "yethitech/tenjin-enterprise"  # Default image name
+  imageTag: "4.6.4"
   persistence:
     size: "5Gi" # Size of the storage
     storageClassName: "standard" # Name of the storage class (adjust based on your cluster)
   service:
     type: NodePort
     port: 8080
+tenjin_ai:
+  image: "yethitech/ai-testcase-generation"  # Default image name
+  imageTag: "latest"
 elasticsearch:
   config:
     bootstrap_memory_lock: true
