@@ -30,5 +30,29 @@ environment:
   POSTGRES_USER: yethi
   POSTGRES_PASSWORD: Yethi123
   DEFAULT_USER_PASSWORD: Welcome@123
-  TENJIN_HOST_NAME: http://localhost
+  TENJIN_HOST_NAME: tenjin.uat.bankdhofar.com
   TENJIN_ALLOWED_URL: http://localhost
+
+ingress:
+  enabled: true
+  className: nginx
+  services:
+    - host: "tenjin.uat.bankdhofar.com"
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: "{{ .Release.Name }}-tenjin-core"
+          servicePort: 8080
+    - host: "tenjin-kibana.uat.bankdhofar.com"
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: "{{ .Release.Name }}-kibana"
+          servicePort: 5601
+  tls:
+    - hosts:
+        - "tenjin.uat.bankdhofar.com"
+      secretName: tls-uat-bankdhofar-com
+    - hosts:
+        - "tenjin-kibana.uat.bankdhofar.com"
+      secretName: tls-uat-bankdhofar-com
