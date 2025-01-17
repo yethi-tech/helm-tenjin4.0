@@ -34,6 +34,7 @@ environment:
   TENJIN_ALLOWED_URL: http://localhost
 
 ingress:
+  bodySize: "20m"
   enabled: true
   className: nginx
   services:
