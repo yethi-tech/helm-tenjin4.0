@@ -34,9 +34,11 @@ environment:
   TENJIN_ALLOWED_URL: http://localhost
 
 ingress:
-  bodySize: "20m"
   enabled: true
   className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "20m" 
+  bodySize: "20m"
   services:
     - host: "tenjin.uat.bankdhofar.com"
       paths:
