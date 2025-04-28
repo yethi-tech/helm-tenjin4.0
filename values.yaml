@@ -26,3 +26,11 @@ environment:
   DEFAULT_USER_PASSWORD: Welcome@123
   TENJIN_HOST_NAME: http://localhost
   TENJIN_ALLOWED_URL: http://localhost
+extraManifests: []
+# - |
+#   apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: my-config
+#   data:
+#     key: value
