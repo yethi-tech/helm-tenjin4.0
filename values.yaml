@@ -33,14 +33,6 @@ environment:
   TENJIN_HOST_NAME: tenjin.uat.bankdhofar.com
   TENJIN_ALLOWED_URL: http://localhost
 
-extraManifests: []
-# - |
-#   apiVersion: v1
-#   kind: ConfigMap
-#   metadata:
-#     name: my-config
-#   data:
-#     key: value
 
 ingress:
   enabled: true
