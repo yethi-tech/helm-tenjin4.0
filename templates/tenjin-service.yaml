@@ -5,10 +5,15 @@ metadata:
   labels:
     app: {{ .Release.Name }}-tenjin-core
 spec:
-  type: {{.Values.tenjin.service.type }}  
+  type: {{ .Values.tenjin.service.type }}
   selector:
     app: tenjin
   ports:
-    - protocol: TCP
-      port: {{.Values.tenjin.service.port }}
+    - name: http-main
+      protocol: TCP
+      port: {{ .Values.tenjin.service.port }}
+      targetPort: 8080
+    - name: http-ext
+      protocol: TCP
+      port: 8090
       targetPort: 8080
