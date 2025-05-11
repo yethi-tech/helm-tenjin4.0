@@ -19,6 +19,7 @@ spec:
           image: "{{ .Values.tenjin.image | default "yethitech/tenjin-enterprise" }}:{{ .Values.tenjin.imageTag | default "4.8.1" }}"
           ports:
             - containerPort: 8080
+            - containerPort: 8090
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-configmaptenjin
