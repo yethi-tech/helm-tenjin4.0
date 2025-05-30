@@ -15,3 +15,4 @@ data:
   db_name: "tenjin"
   db_type: "postgres"
   db_schema: "public"
+  openai_model: "gpt-4.1"

@@ -4,6 +4,7 @@ metadata:
   name: {{ .Release.Name }}-db-init-job
 spec:
   schedule: "0 0 1 1 *"  # Run at 00:00 on Jan 1st every year
+  suspend: true
   jobTemplate:
     spec:
       backoffLimit: 0
@@ -26,23 +27,28 @@ spec:
                   sleep 20;
 
                   echo "Running query 1...";
-                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "INSERT INTO sys_users_password_history (user_id, password_history, updated_at) SELECT id, password, NOW() FROM sys_users WHERE password IS NOT NULL;"
+                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
+                    "INSERT INTO tdes_classification_types (id, name, description, icon, classification_type_id) VALUES (-1, 'TTM', 'Test managment folder', 'aiOutlineFolder', 'ttmfolder');"
                   sleep 20;
 
                   echo "Running query 2...";
-                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE prj_users SET prj_role_mapped = 101 WHERE prj_role_mapped != 100;"
+                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
+                    "ALTER TABLE ai_yts_design_transactions ADD column output_language varchar(255) NULL;"
                   sleep 20;
 
                   echo "Running query 3...";
-                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "DELETE FROM common_project_role_permissions;"
+                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
+                    "ALTER TABLE ai_yts_design_transactions ADD column vector_id varchar(255) NULL;"
                   sleep 20;
 
                   echo "Running query 4...";
-                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "DELETE FROM project_roles_permissions;"
+                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
+                    "ALTER TABLE application ADD COLUMN parallel_sessions_allowed bool DEFAULT false NOT NULL; UPDATE application SET parallel_sessions_allowed = false WHERE parallel_sessions_allowed IS NULL;"
                   sleep 20;
 
-                  echo "Running query 5...";
-                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "DELETE FROM prj_roles WHERE id NOT IN (100, 101);"
+                  echo "Running combined queries 5...";
+                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
+                    "ALTER TABLE public.exe_test_runs ADD is_archived bool DEFAULT false NOT NULL; ALTER TABLE public.exe_test_runs ALTER COLUMN is_archived SET STORAGE PLAIN;"
                   sleep 20;
 
                   echo "All queries executed successfully."
