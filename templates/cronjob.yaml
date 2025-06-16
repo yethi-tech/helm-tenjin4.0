@@ -26,29 +26,17 @@ spec:
                   echo "Sleeping extra 20s for services to settle...";
                   sleep 20;
 
-                  echo "Running query 1...";
+                  echo "Executing DB updates...";
                   PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "INSERT INTO tdes_classification_types (id, name, description, icon, classification_type_id) VALUES (-1, 'TTM', 'Test managment folder', 'aiOutlineFolder', 'ttmfolder');"
-                  sleep 20;
+                    "ALTER TABLE public.email_configuration ALTER COLUMN \"password\" DROP NOT NULL;"
+                  sleep 10;
 
-                  echo "Running query 2...";
                   PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE ai_yts_design_transactions ADD column output_language varchar(255) NULL;"
-                  sleep 20;
+                    "UPDATE public.email_configuration SET authentication_required = true WHERE EXISTS (SELECT 1 FROM public.email_configuration);"
+                  sleep 10;
 
-                  echo "Running query 3...";
                   PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE ai_yts_design_transactions ADD column vector_id varchar(255) NULL;"
-                  sleep 20;
+                    "ALTER TABLE runtime_field_value ADD COLUMN detail_no VARCHAR(255);"
+                  sleep 10;
 
-                  echo "Running query 4...";
-                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE application ADD COLUMN parallel_sessions_allowed bool DEFAULT false NOT NULL; UPDATE application SET parallel_sessions_allowed = false WHERE parallel_sessions_allowed IS NULL;"
-                  sleep 20;
-
-                  echo "Running combined queries 5...";
-                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE public.exe_test_runs ADD is_archived bool DEFAULT false NOT NULL; ALTER TABLE public.exe_test_runs ALTER COLUMN is_archived SET STORAGE PLAIN;"
-                  sleep 20;
-
-                  echo "All queries executed successfully."
+                  echo "All new queries executed successfully."
