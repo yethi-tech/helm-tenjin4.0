@@ -26,15 +26,22 @@ spec:
                   echo "Sleeping extra 20s for services to settle...";
                   sleep 20;
 
-                  echo "Executing DB updates...";
+                  echo "Running: DROP NOT NULL on email_configuration.password";
                   PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
                     "ALTER TABLE public.email_configuration ALTER COLUMN \"password\" DROP NOT NULL;"
                   sleep 10;
 
+                  echo "Running: ADD authentication_required column";
+                  PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
+                    "ALTER TABLE public.email_configuration ADD COLUMN authentication_required bool NULL;"
+                  sleep 10;
+
+                  echo "Running: UPDATE authentication_required = true";
                   PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
                     "UPDATE public.email_configuration SET authentication_required = true WHERE EXISTS (SELECT 1 FROM public.email_configuration);"
                   sleep 10;
 
+                  echo "Running: ADD detail_no column in runtime_field_value";
                   PGPASSWORD="Yethi123" psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
                     "ALTER TABLE runtime_field_value ADD COLUMN detail_no VARCHAR(255);"
                   sleep 10;
