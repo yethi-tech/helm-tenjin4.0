@@ -28,79 +28,14 @@ spec:
 
                   export PGPASSWORD="Yethi123"
 
-                  echo "ALTER TABLE ai_yts_design_transactions: ADD output_language";
+                  echo "UPDATE test_case_attempt: SET test_case_mapped = NULL";
                   psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE ai_yts_design_transactions ADD COLUMN output_language VARCHAR(255);"
+                    "UPDATE test_case_attempt SET test_case_mapped = NULL;"
                   sleep 5;
 
-                  echo "ALTER TABLE ai_yts_design_transactions: ADD vector_id";
+                  echo "UPDATE test_step_attempt: SET test_step_mapped = NULL";
                   psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE ai_yts_design_transactions ADD COLUMN vector_id VARCHAR(255);"
-                  sleep 5;
-
-                  echo "ALTER TABLE application: ADD parallel_sessions_allowed";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE application ADD COLUMN parallel_sessions_allowed BOOL DEFAULT false NOT NULL;"
-                  sleep 5;
-
-                  echo "UPDATE application: SET parallel_sessions_allowed = false if NULL";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "UPDATE application SET parallel_sessions_allowed = false WHERE parallel_sessions_allowed IS NULL;"
-                  sleep 5;
-
-                  echo "ALTER TABLE exe_test_runs: ADD is_archived";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE public.exe_test_runs ADD COLUMN is_archived BOOL DEFAULT false NOT NULL;"
-                  sleep 5;
-
-                  echo "ALTER TABLE exe_test_runs: SET STORAGE PLAIN for is_archived";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE public.exe_test_runs ALTER COLUMN is_archived SET STORAGE PLAIN;"
-                  sleep 5;
-
-                  echo "ALTER TABLE email_configuration: DROP NOT NULL on password";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE public.email_configuration ALTER COLUMN \"password\" DROP NOT NULL;"
-                  sleep 5;
-
-                  echo "ALTER TABLE email_configuration: ADD authentication_required";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE public.email_configuration ADD COLUMN authentication_required BOOL NULL;"
-                  sleep 5;
-
-                  echo "UPDATE email_configuration: SET authentication_required = true";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "UPDATE public.email_configuration SET authentication_required = true WHERE EXISTS (SELECT 1 FROM public.email_configuration);"
-                  sleep 5;
-
-                  echo "ALTER TABLE runtime_field_value: ADD detail_no";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE runtime_field_value ADD COLUMN detail_no VARCHAR(255);"
-                  sleep 5;
-
-                  echo "ALTER TABLE validation_result: ADD detail_no";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE validation_result ADD COLUMN detail_no VARCHAR(255);"
-                  sleep 5;
-
-                  echo "UPDATE runtime_field_value: SET detail_no = '1' where NULL";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "UPDATE runtime_field_value SET detail_no = '1' WHERE detail_no IS NULL;"
-                  sleep 5;
-
-                  echo "UPDATE validation_result: SET detail_no = '1' where NULL";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "UPDATE validation_result SET detail_no = '1' WHERE detail_no IS NULL;"
-                  sleep 5;
-
-                  echo "ALTER TABLE test_case_attempt: ADD is_deleted";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE public.test_case_attempt ADD COLUMN is_deleted BOOL DEFAULT false NOT NULL;"
-                  sleep 5;
-
-                  echo "ALTER TABLE test_step_attempt: ADD is_deleted";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "ALTER TABLE public.test_step_attempt ADD COLUMN is_deleted BOOL DEFAULT false NOT NULL;"
+                    "UPDATE test_step_attempt SET test_step_mapped = NULL;"
                   sleep 5;
 
                   echo "All queries executed successfully."
