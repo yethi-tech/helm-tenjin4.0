@@ -28,14 +28,8 @@ spec:
 
                   export PGPASSWORD="Yethi123"
 
-                  echo "UPDATE test_case_attempt: SET test_case_mapped = NULL";
+                  echo "Running query: UPDATE test_step_attempt SET is_delete = FALSE;";
                   psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "UPDATE test_case_attempt SET test_case_mapped = NULL;"
-                  sleep 5;
+                    "UPDATE test_step_attempt SET is_delete = FALSE;"
 
-                  echo "UPDATE test_step_attempt: SET test_step_mapped = NULL";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "UPDATE test_step_attempt SET test_step_mapped = NULL;"
-                  sleep 5;
-
-                  echo "All queries executed successfully."
+                  echo "Query executed successfully."
