@@ -30,6 +30,6 @@ spec:
 
                   echo "Running query: UPDATE test_step_attempt SET is_delete = FALSE;";
                   psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "UPDATE test_step_attempt SET is_delete = FALSE;"
+                    "UPDATE test_step_attempt SET is_deleted = FALSE;"
 
                   echo "Query executed successfully."
