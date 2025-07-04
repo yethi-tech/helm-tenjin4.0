@@ -28,8 +28,62 @@ spec:
 
                   export PGPASSWORD="Yethi123"
 
-                  echo "Running query: UPDATE test_step_attempt SET is_delete = FALSE;";
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c \
-                    "UPDATE test_step_attempt SET is_deleted = FALSE;"
+                  echo "Running queries one by one with delay..."
 
-                  echo "Query executed successfully."
+                  echo "Executing: DROP COLUMN output_language from ai_yts_design_transactions"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE ai_yts_design_transactions DROP COLUMN output_language;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN vector_id from ai_yts_design_transactions"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE ai_yts_design_transactions DROP COLUMN vector_id;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN parallel_sessions_allowed from application"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE application DROP COLUMN parallel_sessions_allowed;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN is_archived from exe_test_runs"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE exe_test_runs DROP COLUMN is_archived;"
+                  sleep 5
+
+                  echo "Executing: ALTER COLUMN password SET NOT NULL in email_configuration"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE email_configuration ALTER COLUMN \"password\" SET NOT NULL;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN authentication_required from email_configuration"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE email_configuration DROP COLUMN authentication_required;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN detail_no from runtime_field_value"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE runtime_field_value DROP COLUMN detail_no;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN detail_no from validation_result"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE validation_result DROP COLUMN detail_no;"
+                  sleep 5
+
+                  echo "Executing: UPDATE test_case_attempt SET test_case_mapped = testcase_id WHERE test_case_mapped IS NULL"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE test_case_attempt SET test_case_mapped = testcase_id WHERE test_case_mapped IS NULL;"
+                  sleep 5
+
+                  echo "Executing: UPDATE test_step_attempt SET test_step_mapped = test_step_id WHERE test_step_mapped IS NULL"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE test_step_attempt SET test_step_mapped = test_step_id WHERE test_step_mapped IS NULL;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN test_case_snapshot from test_case_attempt"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE test_case_attempt DROP COLUMN test_case_snapshot;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN test_step_sanpshot from test_step_attempt"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE test_step_attempt DROP COLUMN test_step_sanpshot;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN is_deleted from test_case_attempt"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE test_case_attempt DROP COLUMN is_deleted;"
+                  sleep 5
+
+                  echo "Executing: DROP COLUMN is_deleted from test_step_attempt"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE test_step_attempt DROP COLUMN is_deleted;"
+                  sleep 5
+
+                  echo "✅ All queries executed with delay."
