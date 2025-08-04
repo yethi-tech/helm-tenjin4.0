@@ -46,8 +46,8 @@ ingress:
   enabled: true
   className: nginx
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "20m" 
-  bodySize: "20m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "150m" 
+  bodySize: "150m"
   services:
     - host: "tenjin.uat.bankdhofar.com"
       paths:
