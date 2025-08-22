@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  tenjin-enterprise:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-08-22T15:26:36.8202654+05:30"
+    description: A Helm chart for Kubernetes
+    digest: 84e006441ca1ce9253854595f9f880ce976b63f45a13e35f3b085a99c08d87b8
+    name: tenjin-enterprise
+    type: application
+    urls:
+    - https://yethi-tech.github.io/helm-tenjin4.0/version-4.10.5/tenjin-enterprise-4.10.5.tgz
+    version: 4.10.5
+generated: "2025-08-22T15:26:36.817438+05:30"
