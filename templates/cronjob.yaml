@@ -30,12 +30,12 @@ spec:
 
                   echo "Running migration queries..."
 
-                  echo "Executing: Add is_deleted to test_case_attempt"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.test_case_attempt ADD COLUMN is_deleted bool DEFAULT false NOT NULL;"
+                  echo "Executing: Update test_case_attempt set test_case_mapped=NULL"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.test_case_attempt SET test_case_mapped = NULL;"
                   sleep 5
 
-                  echo "Executing: Add is_deleted to test_step_attempt"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.test_step_attempt ADD COLUMN is_deleted bool DEFAULT false NOT NULL;"
+                  echo "Executing: Update test_step_attempt set test_step_mapped=NULL"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.test_step_attempt SET test_step_mapped = NULL;"
                   sleep 5
 
                   echo "✅ Migration queries executed successfully."
