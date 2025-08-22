@@ -28,63 +28,14 @@ spec:
 
                   export PGPASSWORD="Yethi123"
 
-                  echo "Running new migration queries one by one with delay..."
+                  echo "Running migration queries..."
 
-                  echo "Executing: Insert into tdes_classification_types"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "INSERT INTO tdes_classification_types (id, name, description, icon, classification_type_id) VALUES (-1, 'TTM', 'Test managment folder', 'aiOutlineFolder', 'ttmfolder');"
+                  echo "Executing: Add is_deleted to test_case_attempt"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.test_case_attempt ADD COLUMN is_deleted bool DEFAULT false NOT NULL;"
                   sleep 5
 
-                  echo "Executing: Add output_language to ai_yts_design_transactions"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE ai_yts_design_transactions ADD COLUMN output_language varchar(255) NULL;"
+                  echo "Executing: Add is_deleted to test_step_attempt"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.test_step_attempt ADD COLUMN is_deleted bool DEFAULT false NOT NULL;"
                   sleep 5
 
-                  echo "Executing: Add vector_id to ai_yts_design_transactions"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE ai_yts_design_transactions ADD COLUMN vector_id varchar(255) NULL;"
-                  sleep 5
-
-                  echo "Executing: Add parallel_sessions_allowed to application"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE application ADD COLUMN parallel_sessions_allowed bool DEFAULT false NOT NULL;"
-                  sleep 5
-
-                  echo "Executing: Update NULL parallel_sessions_allowed to false"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE application SET parallel_sessions_allowed = false WHERE parallel_sessions_allowed IS NULL;"
-                  sleep 5
-
-                  echo "Executing: Add is_archived to exe_test_runs"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.exe_test_runs ADD COLUMN is_archived bool DEFAULT false NOT NULL;"
-                  sleep 5
-
-                  echo "Executing: Set STORAGE PLAIN on is_archived in exe_test_runs"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.exe_test_runs ALTER COLUMN is_archived SET STORAGE PLAIN;"
-                  sleep 5
-
-                  echo "Executing: Make password nullable in email_configuration"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.email_configuration ALTER COLUMN \"password\" DROP NOT NULL;"
-                  sleep 5
-
-                  echo "Executing: Add authentication_required to email_configuration"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.email_configuration ADD COLUMN authentication_required bool NULL;"
-                  sleep 5
-
-                  echo "Executing: Set authentication_required = true if rows exist"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.email_configuration SET authentication_required = true WHERE EXISTS (SELECT 1 FROM public.email_configuration);"
-                  sleep 5
-
-                  echo "Executing: Add detail_no to runtime_field_value"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE runtime_field_value ADD COLUMN detail_no VARCHAR(255);"
-                  sleep 5
-
-                  echo "Executing: Add detail_no to validation_result"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE validation_result ADD COLUMN detail_no VARCHAR(255);"
-                  sleep 5
-
-                  echo "Executing: Update runtime_field_value set detail_no=1 where NULL"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE runtime_field_value SET detail_no = '1' WHERE detail_no IS NULL;"
-                  sleep 5
-
-                  echo "Executing: Update validation_result set detail_no=1 where NULL"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE validation_result SET detail_no = '1' WHERE detail_no IS NULL;"
-                  sleep 5
-
-                  echo "✅ All new migration queries executed with delay."
-  
+                  echo "✅ Migration queries executed successfully."
