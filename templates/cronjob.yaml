@@ -13,7 +13,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: db-updater
-              image: bitnami/postgresql:13
+              image: postgres:13
               command:
                 - /bin/sh
                 - -c
