@@ -6,6 +6,8 @@ metadata:
     name: {{ .Release.Name }}-tenjin-core
 spec:
   replicas: 1
+  strategy:
+    type: Recreate #This ensures old pod is deleted before new one starts
   selector:
     matchLabels:
       app: tenjin

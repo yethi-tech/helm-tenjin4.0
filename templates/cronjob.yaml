@@ -28,42 +28,8 @@ spec:
 
                   export PGPASSWORD="Yethi123"
 
-                  echo "Running migration queries..."
+                  echo "Running migration query..."
 
-                  echo "Executing: Add agent_copy to learner_audit_trail"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.learner_audit_trail ADD COLUMN agent_copy int8;"
-                  sleep 5
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE sys_users ADD COLUMN two_factor_enabled bool NOT NULL DEFAULT false, ADD COLUMN two_factor_setup_complete bool NOT NULL DEFAULT false;"
 
-                  echo "Executing: Add agent_copy to mastest_runs"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.mastest_runs ADD COLUMN agent_copy int8;"
-                  sleep 5
-
-                  echo "Executing: Add agent_copy to exe_test_run_targets"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.exe_test_run_targets ADD COLUMN agent_copy int8;"
-                  sleep 5
-
-                  echo "Executing: Copy values into agent_copy columns"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.learner_audit_trail SET agent_copy = agent;"
-                  sleep 5
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.mastest_runs SET agent_copy = agent;"
-                  sleep 5
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.exe_test_run_targets SET agent_copy = agent_id;"
-                  sleep 5
-
-                  echo "Executing: Drop NOT NULL constraints"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.exe_test_run_targets ALTER COLUMN agent_id DROP NOT NULL;"
-                  sleep 5
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.learner_audit_trail ALTER COLUMN agent DROP NOT NULL;"
-                  sleep 5
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE public.mastest_runs ALTER COLUMN agent DROP NOT NULL;"
-                  sleep 5
-
-                  echo "Executing: Set old columns to NULL"
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.learner_audit_trail SET agent = NULL;"
-                  sleep 5
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.mastest_runs SET agent = NULL;"
-                  sleep 5
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE public.exe_test_run_targets SET agent_id = NULL;"
-                  sleep 5
-
-                  echo "✅ Migration queries executed successfully."
+                  echo "✅ Migration query executed successfully."
