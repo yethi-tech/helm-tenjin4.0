@@ -30,6 +30,6 @@ spec:
 
                   echo "Running migration query..."
 
-                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "ALTER TABLE sys_users ADD COLUMN two_factor_enabled bool NOT NULL DEFAULT false, ADD COLUMN two_factor_setup_complete bool NOT NULL DEFAULT false;"
+                  psql -h {{ .Release.Name }}-postgres -U "yethi" -d "tenjin" -c "UPDATE sys_users SET last_login_time = '2025-09-29 15:15:42.392526', failed_attempt = '0', is_locked = false;"
 
-                  echo "✅ Migration query executed successfully."
+                  echo "Migration query executed successfully."
