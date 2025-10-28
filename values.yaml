@@ -73,3 +73,12 @@ ingress:
     - hosts:
         - "tenjin-kibana.uat.bankdhofar.com"
       secretName: tls-uat-bankdhofar-com
+pgadmin:
+  image: harbor.cp.bankdhofar.com/dockerhub/dpage/pgadmin4:8.5
+  email: admin@yethi.in
+  password: admin123
+
+  persistence:
+    accessMode: ReadWriteOnce
+    size: 2Gi
+    storageClassName: oci-bv  
