@@ -82,3 +82,10 @@ pgadmin:
     accessMode: ReadWriteOnce
     size: 2Gi
     storageClassName: oci-bv  
+# Gateway configuration
+gateway:
+  namespace: istio-system      # default: istio-system
+  name: gw-uat-bankdhofar-com  # default: gw-uat-bankdhofar-com
+
+# Host configuration
+host: tenjin-pg-admin.uat.bankdhofar.com  # default: tenjin-pg-admin.uat.bankdhofar.com 
