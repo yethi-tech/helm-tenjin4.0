@@ -4,14 +4,14 @@ metadata:
   name: tenjin-pgadmin-gw
 spec:
   gateways:
-    - {{ .Values.gateway.namespace | default "istio-system" }}/{{ .Values.gateway.name | default "gw-uat-bankdhofar-com" }}
+    - {{ .Values.pgadmin.gateway.namespace | default "istio-system" }}/{{ .Values.pgadmin.gateway.name | default "gw-uat-bankdhofar-com" }}
   hosts:
-    - {{ .Values.host | default "tenjin-pg-admin.uat.bankdhofar.com" }}
+    - {{ .Values.pgadmin.host | default "tenjin-pg-admin.uat.bankdhofar.com" }}
   http:
     - match:
         - headers:
             host:
-              exact: {{ .Values.host | default "tenjin-pg-admin.uat.bankdhofar.com" }}
+              exact: {{ .Values.pgadmin.host | default "tenjin-pg-admin.uat.bankdhofar.com" }}
       route:
         - destination:
             host: tenjin-pgadmin
