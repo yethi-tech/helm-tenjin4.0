@@ -77,7 +77,7 @@ ingress:
         - "tenjin-kibana.uat.bankdhofar.com"
       secretName: tls-uat-bankdhofar-com
 pgadmin:
-  image: harbor.cp.bankdhofar.com/dockerhub/dpage/pgadmin4
+  image-name: harbor.cp.bankdhofar.com/dockerhub/dpage/pgadmin4
   tag: 8.5
   email: admin@yethi.in
   password: admin123
