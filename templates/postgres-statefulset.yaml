@@ -7,8 +7,6 @@ metadata:
 spec:
   serviceName: "postgres"
   replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: postgres
