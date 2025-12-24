@@ -20,7 +20,7 @@ spec:
         runAsGroup: 5050
       containers:
         - name: pgadmin
-          image: "{{ .Values.pgadmin["image-name"] | default 'harbor.cp.bankdhofar.com/dockerhub/dpage/pgadmin4' }}:{{ .Values.pgadmin.tag | default '8.5' }}"
+          image: "harbor.cp.bankdhofar.com/dockerhub/dpage/pgadmin4:8.5"
           ports:
             - containerPort: 80
           env:
