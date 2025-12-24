@@ -6,7 +6,6 @@ metadata:
     name: {{ .Release.Name }}-elasticsearch
 spec:
   serviceName: "elasticsearch"
-  replicas: 1
   strategy:
     type: Recreate
   selector:
