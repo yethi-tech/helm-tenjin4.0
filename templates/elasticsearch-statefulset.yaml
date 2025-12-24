@@ -6,8 +6,6 @@ metadata:
     name: {{ .Release.Name }}-elasticsearch
 spec:
   serviceName: "elasticsearch"
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: elasticsearch
