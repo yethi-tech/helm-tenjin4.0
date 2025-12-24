@@ -25,9 +25,9 @@ spec:
             - containerPort: 80
           env:
             - name: PGADMIN_DEFAULT_EMAIL
-              value: "{{ .Values.pgadmin.email | default "admin@yethi.in" }}"
+              value: {{ .Values.pgadmin.email | default "admin@yethi.in" | quote }}
             - name: PGADMIN_DEFAULT_PASSWORD
-              value: "{{ .Values.pgadmin.password | default "admin123" }}"
+              value: {{ .Values.pgadmin.password | default "admin123" | quote }}
             - name: PGADMIN_CONFIG_SERVER_MODE
               value: "False"
           volumeMounts:
@@ -43,7 +43,7 @@ spec:
         - name: servers-json
           configMap:
             name: {{ .Release.Name }}-pgadmin-config
----			
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
