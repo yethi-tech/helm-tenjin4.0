@@ -20,7 +20,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: tenjin-es
-          image: "{{ .Values.elasticsearch.image | default "docker.elastic.co/elasticsearch/elasticsearch:8.17.6" }}"
+          image: "{{ .Values.elasticsearch.image | default "docker.elastic.co/elasticsearch/elasticsearch" }}:{{ .Values.elasticsearch.tag | default "8.17.6" }}"
           ports:
             - containerPort: 9200  # HTTP API
             - containerPort: 9300  # Transport
