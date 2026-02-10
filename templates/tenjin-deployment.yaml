@@ -17,6 +17,7 @@ spec:
       containers:
         - name: tenjin-core   
           image: "{{ .Values.tenjin.image | default "yethitech/tenjin-enterprise" }}:{{ .Values.tenjin.imageTag | default "4.14.2" }}"
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
             - containerPort: 8090
