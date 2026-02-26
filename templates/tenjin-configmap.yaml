@@ -23,3 +23,4 @@ data:
   jwt.private-key: "private_key.pem"
   jwt.public-key: "public_key.pem"
   jwt.public-key.access-token: "my-secure-key-access-token"
+  TENJIN_JACKSON_MAX_STRING_LENGTH: "200000000"
