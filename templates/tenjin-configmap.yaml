@@ -17,7 +17,9 @@ data:
   TENJIN_INDEX_CORE_THREADS: "25"
   TENJIN_ALLOWED_URL: "{{ .Values.environment.TENJIN_ALLOWED_URL }}"
   TENJIN.AI-HOST: http://tenjin-ai:8022
-  server.compression.mime-types: "application/json,application/xml,application/pdf,text/html,text/xml,text/plain,text/css"
+  server.compression.enabled: "true"
+  server.compression.min-response-size: "512" 
+  server.compression.mime-types: "text/html,text/xml,text/plain,text/css,application/json,text/javascript"
   tenjin.scheduler.retention-days: "0"
   jwt.keys.directory: "/etc/tenjin/keys"
   jwt.private-key: "private_key.pem"
