@@ -26,3 +26,6 @@ data:
   jwt.public-key: "public_key.pem"
   jwt.public-key.access-token: "my-secure-key-access-token"
   TENJIN_JACKSON_MAX_STRING_LENGTH: "200000000"
+  OPENAI_API_KEY: "sk-svcacct-FaYmuS44CRh6SFuWMWUfxhR9nJ07"
+  TENJIN_SCHEDULER_CRON: "0 0 0 * * ?"
+  VECTOR_STORE_ID: "vs_699d500711c48191b911afa9ef872bca"
