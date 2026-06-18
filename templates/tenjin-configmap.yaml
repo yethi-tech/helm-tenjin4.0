@@ -38,4 +38,5 @@ data:
   DB_SCHEMA: "public"
   TEST_GEN_INSTANCE: "enterprise"
   tenjin.copilot.service.url: "http://localhost:8000"
+  SERVER_SSL_ENABLED: "true"
 
