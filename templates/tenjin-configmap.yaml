@@ -29,3 +29,13 @@ data:
   OPENAI_API_KEY: "sk-svcacct-FaYmuS44CRh6SFuWMWUfxhR9nJ07"
   TENJIN_SCHEDULER_CRON: "0 0 0 * * ?"
   VECTOR_STORE_ID: "vs_699d500711c48191b911afa9ef872bca"
+  MAIL_PWD: "1C3cr$%cr3am"
+  TENJIN_SCHEDULER_AWAIT_TERMINATION_ENABLED: "true"
+  TENJIN_SCHEDULER_AWAIT_TERMINATION_PERIOD: "120"
+  COOKIE_SECURE: "true"
+  SSL_ENABLED: "true"
+  TEST_GEN_OPENAI_API_KEY: "qwertyuiopasdfghj"
+  DB_SCHEMA: "public"
+  TEST_GEN_INSTANCE: "enterprise"
+  tenjin.copilot.service.url: "http://localhost:8000"
+
